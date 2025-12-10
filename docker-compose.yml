@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+
+  # Proxy inverso
+  proxy:
+    image: nginx:latest
+    container_name: proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - encuesta1
+      - encuesta2
+      - encuesta3
+      - chiste
+
+  
+  # Encuesta (3 réplicas)
+  
+  encuesta1:
+    build: ./encuesta
+    container_name: encuesta1
+    volumes:
+    - ./encuesta:/var/www/html
+
+  encuesta2:
+    build: ./encuesta
+    container_name: encuesta2
+
+  encuesta3:
+    build: ./encuesta
+    container_name: encuesta3
+
+  
+  # Servidor  de chistes
+  chiste:
+    build: ./chiste
+    container_name: chiste
