@@ -9,4 +9,3 @@ $chistes = [
 
 echo "<h1>Chiste informático:</h1>";
 echo "<p>" . $chistes[array_rand($chistes)] . "</p>";
-echo "<p>Servidor: " . gethostname() . "</p>";

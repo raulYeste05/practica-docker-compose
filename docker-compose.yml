@@ -15,26 +15,43 @@ services:
       - encuesta2
       - encuesta3
       - chiste
+      - db
 
-  
   # Encuesta (3 réplicas)
-  
   encuesta1:
     build: ./encuesta
     container_name: encuesta1
-    volumes:
-    - ./encuesta:/var/www/html
+    depends_on:
+      - db
 
   encuesta2:
     build: ./encuesta
     container_name: encuesta2
+    depends_on:
+      - db
 
   encuesta3:
     build: ./encuesta
     container_name: encuesta3
+    depends_on:
+      - db
 
-  
-  # Servidor  de chistes
+  # Servicio de chistes
   chiste:
     build: ./chiste
     container_name: chiste
+
+  # Base de datos MySQL
+  db:
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: encuesta
+    ports:
+      - "3307:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
