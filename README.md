@@ -158,6 +158,7 @@ echo "No: {$data['no']}<br>";
 
 echo "<p>Servidor: " . gethostname() . "</p>";
 
+
 ## 5. Archivo hosts
 Se deben añadir estas líneas al archivo de configuracion para usar los dominios:
 
